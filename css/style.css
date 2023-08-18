@@ -11,3 +11,38 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+#calc {
+    width: 400px;
+    padding: 0.5rem;
+    background-color: #c4c4c4;
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+#calc h3 {
+    font-size: 0.8em;
+    font-weight: 300;
+    color:#666;
+}
+
+#operations {
+    text-align: right;
+}
+
+#previous-operation,
+#current-operation{
+    padding: 0.2em;
+    overflow-wrap: break-word;
+    min-height: 1.6em;        
+}
+
+#previous-operation {
+    color: #777;
+}
+
+#current-operation {
+    font-size: 3em;
+    font-weight: 700;
+}
