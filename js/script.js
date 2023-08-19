@@ -22,7 +22,7 @@ class Calculator {
     //Todas as operações da calculadora
     processOperation(operation) {
         //Checagem se o valor de baixo é vazio
-        if(this.currentOperationText.innerText === ""){
+        if(this.currentOperationText.innerText === "" && operation !== "C"){
             //Mudança de operação
             if(this.previousOperationText.innerText !== "") {
                 this.changeOperation(operation);                    
@@ -55,8 +55,15 @@ class Calculator {
                 this.updateScreen(operationValue, operation,
                 current, previous);
             break;
-
-
+            case "DEL":
+                this.processDelOperator();
+            break;        
+            case "CE":
+                this.processClearCurrent();
+            break;
+            case "C":
+                this.processClearAll();
+            break;
             default:
                 return;
         }
@@ -94,6 +101,22 @@ class Calculator {
         }
         //Tiro o ultimo operador e adiciono o novo qnd clicado
         this.previousOperationText.innerText = this.previousOperationText.innerText.slice(0,-1) + operation;
+    }
+
+    //Deleta o ultimo digito
+    processDelOperator() {
+        this.currentOperationText.innerText = this.currentOperationText.innerText.slice(0, -1);
+    }
+
+    //Limpa o valor atual da operação
+    processClearCurrent() {
+        this.currentOperationText.innerText = ""
+    }
+
+    //Limpa toda a operação
+    processClearAll() {
+        this.currentOperationText.innerText = "";
+        this.previousOperationText.innerText = "";
     }
 
 
