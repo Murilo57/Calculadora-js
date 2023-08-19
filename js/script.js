@@ -21,9 +21,18 @@ class Calculator {
 
     //Todas as operações da calculadora
     processOperation(operation) {
+        //Checagem se o valor de baixo é vazio
+        if(this.currentOperationText.innerText === ""){
+            //Mudança de operação
+            if(this.previousOperationText.innerText !== "") {
+                this.changeOperation(operation);                    
+            }
+            return;
+        }
+
         //Pega valor atual e anterior
         let operationValue;
-        const previous = +this.previousOperationText.innerText;
+        const previous = +this.previousOperationText.innerText.split(" ")[0];
         const current = +this.currentOperationText.innerText;
 
         switch(operation) {
@@ -31,6 +40,23 @@ class Calculator {
                 operationValue = previous + current;
                 this.updateScreen(operationValue, operation, current, previous);
                 break;
+            case "-":
+                operationValue = previous - current;
+                this.updateScreen(operationValue, operation,
+                current, previous);
+            break;
+            case "/":
+                operationValue = previous / current;
+                this.updateScreen(operationValue, operation,
+                current, previous);
+            break;
+            case "*":
+                operationValue = previous * current;
+                this.updateScreen(operationValue, operation,
+                current, previous);
+            break;
+
+
             default:
                 return;
         }
@@ -52,8 +78,24 @@ class Calculator {
            if(previous === 0) {
             operationValue = current;
            } 
+
+           //Adicionado valor para cima do valor atual
+           this.previousOperationText.innerText = `${operationValue} ${operation}`
+           this.currentOperationText.innerText = "";
         }
     }
+
+    //Muda operações matematicas
+    changeOperation(operation) {
+        const mathOperations = ["*", "/", "+", "-"]
+
+        if(!mathOperations.includes(operation)) {
+            return
+        }
+        //Tiro o ultimo operador e adiciono o novo qnd clicado
+        this.previousOperationText.innerText = this.previousOperationText.innerText.slice(0,-1) + operation;
+    }
+
 
 }
 
